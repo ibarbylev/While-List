@@ -3,6 +3,8 @@
     package="com.example.whilelist">
 
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.BIND_ACCESSIBILITY_SERVICE" />  <!-- Для accessibility -->
 
     <application
         android:allowBackup="true"
@@ -22,10 +24,24 @@
 
         <service
             android:name=".WhileListRedirectionService"
-            android:permission="android.permission.BIND_CALL_REDIRECTION_SERVICE">
+            android:permission="android.permission.BIND_CALL_REDIRECTION_SERVICE"
+            android:exported="false">
             <intent-filter>
                 <action android:name="android.telecom.CallRedirectionService" />
             </intent-filter>
+        </service>
+
+        <service
+            android:name=".WhileListAccessibilityService"
+            android:label="While List Accessibility"
+            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.accessibilityservice.AccessibilityService" />
+            </intent-filter>
+            <meta-data
+                android:name="android.accessibilityservice"
+                android:resource="@xml/accessibility_service_config" />
         </service>
     </application>
 

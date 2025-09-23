@@ -15,15 +15,15 @@ class WhileListRedirectionService : CallRedirectionService() {
         initialPhoneAccount: PhoneAccountHandle,
         allowInteractiveResponse: Boolean
     ) {
-        val dialedNumber = handle.schemeSpecificPart.trim().replace("+", "")  // Нормализация
-        val whiteList = whiteListManager.getWhiteList().map { it.trim().replace("+", "") }
+        val dialedNumber = handle.schemeSpecificPart.replace(Regex("[^0-9]"), "")  // Лучшая нормализация: только цифры
+        val whiteList = whiteListManager.getWhiteList().map { it.replace(Regex("[^0-9]"), "") }
 
-        Log.d(TAG, "Попытка вызова: $dialedNumber")
+        Log.d(TAG, "Попытка вызова: $dialedNumber (нормализованный)")
 
-        if (whiteList.any { dialedNumber == it || dialedNumber.endsWith(it) || it.endsWith(dialedNumber) }) {  // Простая проверка на совпадение
-            placeCallUnmodified()  // Разрешаем вызов
+        if (whiteList.any { dialedNumber == it || dialedNumber.endsWith(it) || it.endsWith(dialedNumber) }) {
+            placeCallUnmodified()  // Разрешаем
         } else {
-            cancelCall()  // Блокируем максимально быстро
+            cancelCall()  // Блокируем
             Log.d(TAG, "Вызов заблокирован: $dialedNumber не в белом списке")
         }
     }

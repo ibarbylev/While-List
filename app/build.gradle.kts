@@ -10,8 +10,7 @@ android {
     defaultConfig {
         applicationId = "com.example.whilelist"
         minSdk = 29
-//        targetSdk = 35
-        targetSdk = 29
+        targetSdk = 33
         versionCode = 1
         versionName = "1.0"
 
@@ -47,4 +46,3 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 }
-

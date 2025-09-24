@@ -3,9 +3,7 @@
     package="com.example.whilelist">
 
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.CALL_PHONE" />
-    <uses-permission android:name="android.permission.BIND_ACCESSIBILITY_SERVICE" />  <!-- Для accessibility -->
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />  <!-- Для Toast в сервисе, если нужно -->
+    <uses-permission android:name="android.permission.BIND_ACCESSIBILITY_SERVICE" />
 
     <application
         android:allowBackup="true"
@@ -22,15 +20,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <service
-            android:name=".WhileListRedirectionService"
-            android:permission="android.permission.BIND_CALL_REDIRECTION_SERVICE"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="android.telecom.CallRedirectionService" />
-            </intent-filter>
-        </service>
 
         <service
             android:name=".WhileListAccessibilityService"

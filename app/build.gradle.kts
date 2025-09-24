@@ -5,12 +5,12 @@ plugins {
 
 android {
     namespace = "com.example.whilelist"
-    compileSdk = 35
+    compileSdk = 34  // Обновлено для совместимости с зависимостями (Android 14 API)
 
     defaultConfig {
         applicationId = "com.example.whilelist"
-        minSdk = 29
-        targetSdk = 33
+        minSdk = 29  // Android 10
+        targetSdk = 31  // Android 12 (сохраняем для поведения на 10-12)
         versionCode = 1
         versionName = "1.0"
 

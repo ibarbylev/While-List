@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.BIND_ACCESSIBILITY_SERVICE" />  <!-- Для accessibility -->
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />  <!-- Для Toast в сервисе, если нужно -->
 
     <application
         android:allowBackup="true"

@@ -4,5 +4,5 @@
     android:accessibilityFeedbackType="feedbackGeneric"
     android:accessibilityFlags="flagDefault"
     android:canRetrieveWindowContent="true"
-    android:description="Service for blocking calls not in whitelist"
-    android:packageNames="com.android.phone,com.google.android.dialer" />  <!-- Стандартные dialer пакеты -->
+    android:description="@string/accessibility_description"
+    android:packageNames="com.android.phone,com.google.android.dialer,com.miui.contacts" />  <!-- Добавлен MIUI пакет -->

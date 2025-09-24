@@ -5,5 +5,7 @@
         <item name="colorPrimary">@color/purple_500</item>
         <item name="colorPrimaryDark">@color/purple_700</item>
         <item name="colorAccent">@color/teal_200</item>
+        <item name="windowActionBar">false</item>  <!-- NoActionBar, как в вашем themes.xml -->
+        <item name="windowNoTitle">true</item>
     </style>
 </resources>

@@ -1,4 +1,4 @@
 <resources>
-<string name="app_name">While List</string>
-<string name="accessibility_description">Service for blocking calls not in whitelist</string>
+    <string name="app_name">While List</string>
+    <string name="accessibility_description">Service for blocking calls not in whitelist</string>
 </resources>

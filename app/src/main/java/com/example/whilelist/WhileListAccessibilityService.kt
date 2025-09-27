@@ -12,16 +12,17 @@ class WhileListAccessibilityService : AccessibilityService() {
     private val whiteListManager by lazy { WhiteListManager(this) }
 
     override fun onAccessibilityEvent(event: AccessibilityEvent) {
-        Log.d(TAG, "Accessibility event received: ${event.eventType}")
-        if (event.eventType == AccessibilityEvent.TYPE_WINDOW_CONTENT_CHANGED || event.eventType == AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED) {
+        Log.d(TAG, "Event received: type=${event.eventType}, package=${event.packageName}")
+        if (event.packageName == "com.miui.contacts" || event.packageName == "com.android.phone") {  // MIUI dialer
             val rootNode = rootInActiveWindow ?: return
             val dialedNumber = findDialedNumber(rootNode)
-            if (dialedNumber != null && isCallButtonEvent(event) ) {
+            if (dialedNumber != null && isCallButtonEvent(event)) {
                 val normalizedNumber = dialedNumber.replace(Regex("[^0-9]"), "")
                 val whiteList = whiteListManager.getWhiteList().map { it.replace(Regex("[^0-9]"), "") }
+                Log.d(TAG, "Dialed number: $normalizedNumber, whitelist: $whiteList")
                 if (!whiteList.any { normalizedNumber == it || normalizedNumber.endsWith(it) || it.endsWith(normalizedNumber) }) {
                     performGlobalAction(GLOBAL_ACTION_BACK)
-                    Log.d(TAG, "Вызов заблокирован accessibility: $normalizedNumber")
+                    Log.d(TAG, "Вызов заблокирован: $normalizedNumber не в белом списке")
                     Toast.makeText(this, "Вызов заблокирован!", Toast.LENGTH_SHORT).show()
                 }
             }
@@ -42,7 +43,7 @@ class WhileListAccessibilityService : AccessibilityService() {
     }
 
     private fun isCallButtonEvent(event: AccessibilityEvent): Boolean {
-        return event.className?.contains("Button") == true && (event.text?.contains("Call") == true || event.text?.contains("Вызов") == true || event.text?.contains("Позвонить") == true)
+        return event.className?.contains("Button") == true && (event.text?.contains("Call") == true || event.text?.contains("Вызов") == true || event.text?.contains("Позвонить") == true || event.contentDescription?.contains("Call") == true)
     }
 
     override fun onInterrupt() {

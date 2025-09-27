@@ -11,7 +11,7 @@ import com.example.whilelist.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
-    private var binding: ActivityMainBinding? = null  // Nullable для безопасности
+    private var binding: ActivityMainBinding? = null
     private var adapter: NumberAdapter? = null
     private val whiteListManager by lazy { WhiteListManager(this) }
     private val TAG = "MainActivityDebug"
@@ -57,12 +57,14 @@ class MainActivity : AppCompatActivity() {
 
             if (!isAccessibilityServiceEnabled()) {
                 requestAccessibilityPermission()
+            } else {
+                Toast.makeText(this, "Accessibility включен, протестируйте вызов", Toast.LENGTH_LONG).show()
             }
             Log.d(TAG, "Accessibility check done")
         } catch (e: Exception) {
             Log.e(TAG, "Краш в onCreate: ${e.message}", e)
             Toast.makeText(this, "Ошибка запуска: ${e.message}", Toast.LENGTH_LONG).show()
-            finish()  // Закрыть activity при краше
+            finish()
         }
     }
 
